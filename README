@@ -1,0 +1,71 @@
+---
+
+# Digital Business Card Scanner
+
+## Overview
+
+**Digital Business Card Scanner** is a simple and effective tool that allows users to scan physical business cards and convert them into digital contacts. The tool uses Optical Character Recognition (OCR) to extract text from scanned images, allowing users to store and manage contact information conveniently.
+
+## Features
+
+- **Image Upload and Capture:** Upload or capture images of business cards.
+- **Text Extraction:** Uses OCR to extract text from the images.
+- **Local Storage:**
+  - Save the scanned business card image to your device.
+  - Export the extracted contact information as a `.txt` file.
+- **Editable Information:** Users can manually correct or edit the extracted information.
+
+## Installation
+
+This tool is implemented as a single HTML file and requires no backend server. You can deploy it directly on any static file hosting service.
+
+### Prerequisites
+
+- A modern web browser (e.g., Chrome, Firefox, Safari) that supports HTML5 and JavaScript.
+
+### Deployment
+
+1. **Download or Clone the Repository:**
+   - Download the `index.html` file or clone the repository from GitHub if available.
+
+2. **Host the Files:**
+   - Upload `index.html` to a static file hosting service like [GitHub Pages](https://pages.github.com/), [Netlify](https://www.netlify.com/), or [Vercel](https://vercel.com/).
+
+3. **Access the Tool:**
+   - Open the hosted `index.html` URL in a web browser to use the Digital Business Card Scanner.
+
+## Usage
+
+1. **Upload or Capture an Image:**
+   - Click on the "Choose File" button to upload an image of a business card, or use your device’s camera to capture a photo.
+
+2. **Scan the Card:**
+   - Click on the "Scan Card" button to process the uploaded image. The tool will extract the text from the card and display it on the screen.
+
+3. **Save Scanned Data:**
+   - **Save Card Image:** Click on the "Save Card Image" button to download the scanned image of the business card.
+   - **Save Card Info:** Click on the "Save Card Info" button to download the extracted contact information as a `.txt` file.
+
+## Contributing
+
+Contributions are welcome! To contribute to the project:
+
+1. **Fork the Repository:**
+   - Fork the repository on GitHub to create your own copy of the project.
+
+2. **Make Changes:**
+   - Clone your forked repository to your local machine and make changes or add new features.
+
+3. **Submit a Pull Request:**
+   - Push your changes to your fork and submit a pull request with a description of your changes.
+
+4. **Contact:**
+   - For questions or issues, open an issue on the GitHub repository or contact the maintainer via email.
+
+## License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). See the LICENSE file for details.
+
+---
+
+Feel free to adjust the contact information, licensing, or deployment instructions as needed for your specific situation.
