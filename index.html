@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Business Card Scanner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            display: block;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #results {
+            margin-top: 20px;
+        }
+        pre {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .file-buttons {
+            margin-top: 20px;
+        }
+        .file-buttons button {
+            background-color: #28a745;
+        }
+        .file-buttons button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Digital Business Card Scanner</h1>
+        <input type="file" id="upload" accept="image/*" />
+        <button onclick="scanImage()">Scan Card</button>
+        <div id="results">
+            <h2>Extracted Information:</h2>
+            <pre id="output"></pre>
+        </div>
+        <div class="file-buttons">
+            <button onclick="saveCardImage()">Save Card Image</button>
+            <button onclick="saveCardInfo()">Save Card Info</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/2.1.1/tesseract.min.js"></script>
+    <script>
+        let scannedImageData = '';
+
+        function scanImage() {
+            const fileInput = document.getElementById('upload');
+            if (fileInput.files.length === 0) {
+                alert('Please select an image file.');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                scannedImageData = event.target.result;
+
+                Tesseract.recognize(
+                    scannedImageData,
+                    'eng',
+                    {
+                        logger: info => console.log(info)
+                    }
+                ).then(({ data: { text } }) => {
+                    document.getElementById('output').textContent = text;
+                }).catch(err => {
+                    console.error(err);
+                    alert('An error occurred while processing the image.');
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function saveCardImage() {
+            if (!scannedImageData) {
+                alert('No image to save. Please scan a card first.');
+                return;
+            }
+
+            const link = document.createElement('a');
+            link.href = scannedImageData;
+            link.download = 'business_card.png';
+            link.click();
+        }
+
+        function saveCardInfo() {
+            const cardInfo = document.getElementById('output').textContent;
+            if (!cardInfo) {
+                alert('No information to save. Please scan a card first.');
+                return;
+            }
+
+            const blob = new Blob([cardInfo], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'business_card_info.txt';
+            link.click();
+        }
+    </script>
+</body>
+</html>
